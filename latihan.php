@@ -1,7 +1,7 @@
-<form action="" method="post">
-    email : <input type="email" name="email">
-    password : <input type="password" name="passw" id="passw">
-    <input type="submit" name="kirim" value="login">
+<form action="" method="get">
+    nama : <input type="text" name="nama">
+    alamat : <input type="text" name="alamat" >
+    <input type="submit" name="kirim" value="simpan">
     </form>
 
 <?php 
@@ -24,11 +24,19 @@
     // }
 
     // $email = $_POST['email'];
-    if(isset($_POST['kirim'])){
-    echo $_POST['email'];
-    echo '<br>';
-    echo $_POST['passw'];
-    }
+    // if(isset($_POST['kirim'])){
+    // echo $_POST['email'];
+    // echo '<br>';
+    // echo $_POST['passw'];
+    // }
     
+    if(isset($_POST['kirim'])){
+    $nama = $_GET['nama'];
+    $alamat = $_GET['alamat'];
+    echo "<br>";
+    echo $nama;
+    echo "<br>";
+    echo $alamat;
+    }  
 ?>
 
