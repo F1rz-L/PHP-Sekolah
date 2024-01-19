@@ -1,14 +1,14 @@
 <form action="" method="get">
-        Tgl Lahir : <input type="date" name="tgll" id="">
+        Tgl Lahir : <input type="date" name="tgll" required>
         <input type="submit" name="submit" value="Cek!" >
 </form>
 
 <?php 
     $zodiak = "Tidak Tentu";
-    
     if(isset($_GET['submit'])){
     $bln = explode("-", $_GET['tgll'])[1];
-    $tgl = explode("-", $_GET['tgll'])[2];}
+    $tgl = explode("-", $_GET['tgll'])[2];
+    }
     
     if(isset($_GET['submit'])){
         if($bln == 1&& $tgl >= 20 || $bln == 2 && $tgl <= 18){
