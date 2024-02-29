@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->increments('idpelanggan');
             $table->string('pelanggan');
-            $table->enum('jeniskelamin', ['P','L'])->default('L');
+            $table->enum('jeniskelamin', ['P','L']);
             $table->string('alamat');
             $table->integer('telp');
             $table->string('email');
-            $table->string('password');
+            $table->string('password'); 
             $table->timestamps();
         });
     }
