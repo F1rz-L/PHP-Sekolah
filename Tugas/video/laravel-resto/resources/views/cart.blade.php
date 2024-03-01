@@ -27,7 +27,11 @@
                             <td>{{ $nomor += 1 }}</td>
                             <td>{{ $menu['menu'] }}</td>
                             <td>{{ $menu['harga'] }}</td>
-                            <td>{{ $menu['jumlah'] }}</td>
+                            <td>
+                                <span><a href="{{ url('/kurang/'.$menu['idmenu']) }}"> [-] </a></span>
+                                {{ $menu['jumlah'] }}
+                                <span><a href="{{ url('/tambah/'.$menu['idmenu']) }}"> [+] </a></span>
+                            </td>
                             <td>{{ $menu['harga'] * $menu['jumlah'] }}</td>
                             <td class="table-danger"><a href="{{ url('/hapus/'.$menu['idmenu']) }}">Hapus</a></td>
                         </tr>
@@ -42,6 +46,9 @@
                     </tr>
                 </tbody>
             </table>
+            <div>
+                <a class="btn btn-success" href="{{ url('/checkout') }}">Checkout</a>
+            </div>
         </div>
 
     @else

@@ -55,8 +55,8 @@
                 @yield('content')
             </div>
         </div>
-        <div>
-            Footer
+        <div class="bg-secondary mt-5">
+            <p class="text-center text-light">@firz.id</p>
         </div>
     </div>
 
