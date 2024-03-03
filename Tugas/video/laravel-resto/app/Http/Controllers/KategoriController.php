@@ -34,7 +34,6 @@ class KategoriController extends Controller
         $data = $request->validate([
             'kategori' => 'required',
         ]);
-        // Kategori::create('data', $data);
         Kategori::create([
             'kategori' => $data['kategori'],
         ]);

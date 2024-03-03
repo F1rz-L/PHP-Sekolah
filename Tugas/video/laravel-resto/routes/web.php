@@ -57,6 +57,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function(){
         Route::resource('/pelanggan', PelangganController::class);
         Route::resource('/order', OrderController::class);
         Route::resource('/orderdetail', OrderDetailController::class);
+        Route::resource('/pelanggan', PelangganController::class);
         Route::get('/select', [MenuController::class, 'select']);
         Route::post('/postmenu/{id}', [MenuController::class, 'update']);
     });
