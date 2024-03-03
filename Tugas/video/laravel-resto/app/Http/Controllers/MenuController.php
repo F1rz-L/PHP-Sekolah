@@ -112,13 +112,13 @@ class MenuController extends Controller
             $namagambar = $request->file('gambar')->getClientOriginalName();
             
             $data = $request->validate([
+                'gambar' => 'required|max:2048',
                 'menu' => 'required',
                 'deskripsi' => 'required',
-                'gambar' => 'required|max:2048',
                 'harga' => 'required',
             ]);
             
-            Kategori::where('idmenu', $idmenu)->update([
+            Menu::where('idmenu', $idmenu)->update([
                 'menu' => $data['menu'],
                 'deskripsi' => $data['deskripsi'],
                 'gambar' => $namagambar,
@@ -126,7 +126,6 @@ class MenuController extends Controller
             ]);
             
             $request->gambar->move(public_path('img'), $namagambar);
-            
             return redirect('/admin/menu');
         } 
         
@@ -137,7 +136,7 @@ class MenuController extends Controller
                 'harga' => 'required',
             ]);
 
-            Kategori::where('idmenu', $idmenu)->update([
+            Menu::where('idmenu', $idmenu)->update([
                 'menu' => $data['menu'],
                 'deskripsi' => $data['deskripsi'],
                 'harga' => $data['harga'],

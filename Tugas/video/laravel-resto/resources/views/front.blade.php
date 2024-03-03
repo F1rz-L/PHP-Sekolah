@@ -36,7 +36,7 @@
                             <li class="nav-item">
                                 {{ session('idpelanggan')['email'] }}
                             </li>
-                            <li class="nav-item"><a href="{{ url('/logout') }}">Logout</a></li>
+                            <li class="nav-item"><a class="btn btn-secondary" href="{{ url('/logout') }}">Logout</a></li>
                         @endif
                     </ul>
                 </div>
@@ -46,8 +46,8 @@
             <div class="col-2">
                 <ul class="list-group">
                     @foreach ($kategoris as $kategori)
-                        <li class="list-group-item"><a
-                                href="{{ url('show/' . $kategori->idkategori) }}">{{ $kategori->kategori }}</a></li>
+                        <li class="list-group-item">
+                            <a class="text-black text-decoration-none" href="{{ url('show/' . $kategori->idkategori) }}">{{ $kategori->kategori }}</a></li>
                     @endforeach
                 </ul>
             </div>

@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <form action="{{ url('/admin/postmenu/'.$menu->idmenu) }}" method="post">
+            <form action="{{ url('/admin/postmenu/'.$menu->idmenu) }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <select class="form-select" name="idkategori">

@@ -33,7 +33,7 @@
                                 <span><a href="{{ url('/tambah/'.$menu['idmenu']) }}"> [+] </a></span>
                             </td>
                             <td>{{ $menu['harga'] * $menu['jumlah'] }}</td>
-                            <td class="table-danger"><a href="{{ url('/hapus/'.$menu['idmenu']) }}">Hapus</a></td>
+                            <td class="table-danger"><a class="btn btn-danger" href="{{ url('/hapus/'.$menu['idmenu']) }}">Hapus</a></td>
                         </tr>
 
                     @php
@@ -42,7 +42,7 @@
                     @endforeach
                     <tr class="table-secondary">
                         <td colspan="4">Total Pembayaran</td>
-                        <td>{{ $total }}</td>
+                        <td colspan="2">{{ $total }}</td>
                     </tr>
                 </tbody>
             </table>
