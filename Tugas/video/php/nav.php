@@ -1,8 +1,8 @@
 <nav>
     <ul>
-        <li><a href='?menu=tentang'>Tentang</a></li>
-        <li><a href='?menu=kontak'>Kontak</a></li>
-        <li><a href='?menu=login'>Login</a></li>
+        <li><a href='?menu=lat01'>Lat 01</a></li>
+        <li><a href='?menu=lat02'>Lat 02</a></li>
+        <li><a href='?menu=lat03'>Lat 03</a></li>
     </ul>
 </nav>
 
