@@ -5,10 +5,12 @@ function Nav(){
     return(
         <div className="App">
             <ul>
-                <Link to={"/"}>Home</Link>
-                <Link to={"/sejarah"}>Sejarah</Link>
-                <Link to={"/kontak"}>Kontak</Link>
-                <Link to={"/tentang"}>Tentang</Link>
+                <li><Link to={"/"}>Home</Link></li>
+                <li><Link to={"/sejarah"}>Sejarah</Link></li>
+                <li><Link to={"/kontak"}>Kontak</Link></li>
+                <li><Link to={"/tentang"}>Tentang</Link></li>
+                <li><Link to={"/siswa"}>Siswa</Link></li>
+                <li><Link to={"/menu"}>Menu</Link></li>
             </ul>
         </div>
     )

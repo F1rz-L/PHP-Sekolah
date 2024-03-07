@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { createBrowserRouter, BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
+import "../public/style.css";
+// import "./App.css";
 import Kontak from "./pages/Kontak.jsx";
 import Nav from "./pages/Nav.jsx";
 import Sejarah from "./pages/Sejarah.jsx";
 import Tentang from "./pages/Tentang.jsx";
 import Home from "./pages/Home.jsx";
+import Siswa from "./pages/Siswa.jsx";
+import Menu from "./pages/Menu.jsx";
 
 function App() {
     return (
@@ -16,6 +19,8 @@ function App() {
                 <Route path='/sejarah' element={<Sejarah/>}/>
                 <Route path='/kontak' element={<Kontak/>}/>
                 <Route path='/tentang' element={<Tentang/>}/>
+                <Route path='/siswa' element={<Siswa/>}/>
+                <Route path='/menu' element={<Menu/>}/>
             </Routes>
         </>
     );
