@@ -23,4 +23,16 @@ $router->group( ['prefix' => 'api'], function() use ($router) {
     $router->post('/kategori', ['uses' => 'KategoriController@create']);
     $router->put('/kategori/{id}', ['uses' => 'KategoriController@update']);
     $router->delete('/kategori/{id}', ['uses' => 'KategoriController@destroy']);
+
+    $router->get('/pelanggan', ['uses' => 'PelangganController@index']);
+    $router->get('/pelanggan/{id}', ['uses' => 'PelangganController@show']);
+    $router->post('/pelanggan', ['uses' => 'PelangganController@create']);
+    $router->put('/pelanggan/{id}', ['uses' => 'PelangganController@update']);
+    $router->delete('/pelanggan/{id}', ['uses' => 'PelangganController@destroy']);
+
+    $router->get('/menu', ['uses' => 'MenuController@index']);
+    $router->get('/menu/{id}', ['uses' => 'MenuController@show']);
+    $router->post('/menu', ['uses' => 'MenuController@create']);
+    $router->put('/menu/{id}', ['uses' => 'MenuController@update']);
+    $router->delete('/menu/{id}', ['uses' => 'MenuController@destroy']);
 });

@@ -14,8 +14,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        // return 'ini index';
-        return response()->json('ini itu index');
+        $data = Kategori::all();
+
+        return response()->json($data);
     }
 
     /**
@@ -25,7 +26,13 @@ class KategoriController extends Controller
      */
     public function create(Request $request)
     {
-        return response()->json($request);
+        $this->validate($request, [
+            'kategori' => 'required|unique:kategoris',
+            'keterangan' => 'required',
+        ]);
+
+        Kategori::create($request->all());
+        return response()->json("Data berhasil dimasukkan");
     }
 
     /**
@@ -45,9 +52,11 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function show(Kategori $kategori)
+    public function show($id)
     {
-        return response()->json("Menampilkan 1 data...");
+        $data = Kategori::where('idkategori', $id)->get();
+
+        return response()->json($data);
     }
 
     /**
@@ -68,9 +77,11 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kategori $kategori)
+    public function update(Request $request, $id)
     {
-        return response()->json("ini update $kategori");
+        Kategori::where('idkategori', $id)->update($request->all());
+
+        return response()->json("Mengupdate kategori dengan id $id");
     }
 
     /**
@@ -79,8 +90,10 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
-        return response()->json("ini mendelete $kategori");
+        Kategori::where('idkategori', $id)->delete();
+
+        return response()->json("Menghapus kategori dengan id $id");
     }
 }

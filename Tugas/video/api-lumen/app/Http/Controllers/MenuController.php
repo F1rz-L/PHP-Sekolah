@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pelanggan;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
-class PelangganController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $data = Pelanggan::all();
+        $data = Menu::all();
 
         return response()->json($data);
     }
@@ -27,13 +27,25 @@ class PelangganController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'pelanggan' => 'required|unique:pelanggans',
-            'alamat' => 'required',
-            'telp' => 'required|unique:pelanggans',
+            'idkategori' => 'required|numeric',
+            'menu' => 'required',
+            'gambar' => 'required|max:2048',
+            'harga' => 'required|numeric',
         ]);
-        
-        Pelanggan::create($request->all());
-        return response()->json("Data berhasil dimasukkan");
+
+        $namagambar = $request->file('gambar')->getClientOriginalName();
+        $request->file('gambar')->move('upload', $namagambar);
+
+        $data = [
+            'idkategori' => $request->input('idkategori'),
+            'menu' => $request->input('menu'),
+            'gambar' => url('upload/', $namagambar),
+            'harga' => $request->input('harga'),
+        ];
+
+        $menu = Menu::create($data);
+
+        return response()->json($data);
     }
 
     /**
@@ -50,23 +62,21 @@ class PelangganController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pelanggan  $pelanggan
+     * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Menu $menu)
     {
-        $data = Pelanggan::where('idpelanggan', $id)->get();
-
-        return response()->json($data);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pelanggan  $pelanggan
+     * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pelanggan $pelanggan)
+    public function edit(Menu $menu)
     {
         //
     }
@@ -75,26 +85,22 @@ class PelangganController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pelanggan  $pelanggan
+     * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Menu $menu)
     {
-        Pelanggan::where('idpelanggan', $id)->update($request->all());
-
-        return response()->json("Mengupdate pelanggan dengan id $id");  
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pelanggan  $pelanggan
+     * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
-        Pelanggan::where('idpelanggan', $id)->delete();
-
-        return response()->json("Menghapus pelanggan dengan id $id");
+        //
     }
 }
