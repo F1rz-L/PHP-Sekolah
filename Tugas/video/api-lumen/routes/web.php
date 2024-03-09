@@ -21,7 +21,6 @@ $router->post('/register', ['uses' => 'LoginController@register']);
 $router->post('/login', ['uses' => 'LoginController@login']);
 
 $router->group( ['prefix' => 'api', 'middleware' => 'auth'], function() use ($router) {
-
     $router->get('/kategori', ['uses' => 'KategoriController@index']);
     $router->get('/kategori/{id}', ['uses' => 'KategoriController@show']);
     $router->post('/kategori', ['uses' => 'KategoriController@create']);

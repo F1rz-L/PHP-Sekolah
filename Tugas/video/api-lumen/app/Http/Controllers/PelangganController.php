@@ -27,13 +27,19 @@ class PelangganController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'pelanggan' => 'required|unique:pelanggans',
+            'pelanggan' => 'required',
             'alamat' => 'required',
             'telp' => 'required|unique:pelanggans',
         ]);
         
-        Pelanggan::create($request->all());
-        return response()->json("Data berhasil dimasukkan");
+        $pelanggan = Pelanggan::create($request->all());
+
+        if ($pelanggan) {
+            return response()->json([
+                'pesan' => 'Data pelanggan berhasil ditambahkan',
+                'data' => $pelanggan,
+            ], 201);
+        }
     }
 
     /**
@@ -80,9 +86,14 @@ class PelangganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Pelanggan::where('idpelanggan', $id)->update($request->all());
+        $update = Pelanggan::where('idpelanggan', $id)->update($request->all());
 
-        return response()->json("Mengupdate pelanggan dengan id $id");  
+        if ($update) {
+            return response()->json([
+                'pesan' => "Mengupdate pelanggan dengan id $id",
+                'data' => $update
+            ], 201);  
+        }
     }
 
     /**
@@ -93,8 +104,13 @@ class PelangganController extends Controller
      */
     public function destroy($id)
     {
-        Pelanggan::where('idpelanggan', $id)->delete();
+        $pelanggan = Pelanggan::where('idpelanggan', $id)->delete();
 
-        return response()->json("Menghapus pelanggan dengan id $id");
+        if ($pelanggan) {
+            return response()->json([
+                'pesan' => "Data pelanggan dengan id $id berhasil dihapus",
+                'data' => $pelanggan
+            ], 200);
+        }
     }
 }
