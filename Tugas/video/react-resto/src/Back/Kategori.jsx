@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { link } from "../Axios/link";
 import { useForm } from "react-hook-form";
+import UseGet from "../Hook/UseGet";
 
 function Kategori() {
-    const [isi, setIsi] = useState([]);
+    const [isi] = UseGet('/kategori');
     const [pesan, setPesan] = useState('');
     const [idKategori, setIdKategori] = useState('');
     const [pilihan, setPilihan] = useState(true);
@@ -17,10 +18,11 @@ function Kategori() {
         setValue,
     } = useForm();
     
-    async function fetchData() {
-        const request = await link.get("/kategori");
-        setIsi(request.data);
-    }
+    // async function fetchData() {
+    //     const request = await link.get("/kategori");
+    //     console.log(request)
+    //     setIsi(request.data);
+    // }
 
     function simpan(data){
         if(pilihan){
@@ -31,12 +33,11 @@ function Kategori() {
         }
 
         reset()
-        fetchData()
     }
 
-    useEffect(() => {
-        fetchData()
-    })
+    // useEffect(() => {
+    //     fetchData()
+    // }, [])
 
     async function hapus(idkategori){
         if (window.confirm('Yakin menghapus kategori ini?')) {
