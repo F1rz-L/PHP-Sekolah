@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { link } from "../Axios/link";
 import { useForm } from "react-hook-form";
 import UseGet from "../Hook/UseGet";
@@ -74,7 +74,7 @@ function Kategori() {
                 </form>
             </div>
             <div className="row">
-                <table className="table table-bordered  fs-6">
+                <table className="table table-bordered mt-4 fs-6">
                     <thead>
                         <tr className="text-center">
                             <th>No</th>

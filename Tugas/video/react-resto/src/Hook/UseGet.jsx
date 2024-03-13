@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { link } from "../Axios/link";
 
 function UseGet(url) {
     const [isi, setIsi] = useState([]);
-    
-    async function fetchData() {
-        const request = await link.get(url);
-        console.log(request)
-        setIsi(request.data);
-    }
 
     useEffect(() => {
-        fetchData()
-    }, [isi])
+        let ambil = true;
+        async function fetchData() {
+            const request = await link.get(url);
+            if (ambil) {
+                setIsi(request.data);
+            }
+        }
+        fetchData();
+        return () => (ambil = false);
+    }, [isi]);
 
-  return ([
-    isi,
-    
-  ])
+    return [isi];
 }
 
-export default UseGet
+export default UseGet;
