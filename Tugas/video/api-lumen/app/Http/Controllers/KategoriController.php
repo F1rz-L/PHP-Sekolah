@@ -31,8 +31,13 @@ class KategoriController extends Controller
             'keterangan' => 'required',
         ]);
 
-        Kategori::create($request->all());
-        return response()->json("Data berhasil dimasukkan");
+        $kategori = Kategori::create($request->all());
+        if ($kategori) {
+            return response()->json([
+                'pesan' => 'Data kategori berhasil ditambahkan',
+                'data' => $kategori
+            ], 201);
+        }
     }
 
     /**
@@ -56,7 +61,7 @@ class KategoriController extends Controller
     {
         $data = Kategori::where('idkategori', $id)->get();
 
-        return response()->json($data);
+        return response()->json($data, 200);
     }
 
     /**
@@ -79,9 +84,11 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Kategori::where('idkategori', $id)->update($request->all());
+        $kategori = Kategori::where('idkategori', $id)->update($request->all());
 
-        return response()->json("Mengupdate kategori dengan id $id");
+        if ($kategori) {
+            return response()->json("Mengupdate kategori dengan ID $id", 201);
+        }
     }
 
     /**
@@ -94,6 +101,6 @@ class KategoriController extends Controller
     {
         Kategori::where('idkategori', $id)->delete();
 
-        return response()->json("Menghapus kategori dengan id $id");
+        return response()->json("Menghapus kategori dengan ID $id");
     }
 }

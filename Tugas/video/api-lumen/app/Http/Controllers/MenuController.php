@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class MenuController extends Controller
@@ -14,7 +15,11 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $data = Menu::all();
+        $data = DB::table('menus')
+        ->join('kategoris', 'kategoris.idkategori', '=', 'menus.idkategori')
+        ->select('menus.*', 'kategoris.kategori')
+        ->orderBy('kategori', 'ASC')
+        ->get();
 
         return response()->json($data, 200);
     }

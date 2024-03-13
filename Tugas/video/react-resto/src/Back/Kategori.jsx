@@ -4,26 +4,54 @@ import { useForm } from "react-hook-form";
 
 function Kategori() {
     const [isi, setIsi] = useState([]);
+    const [pesan, setPesan] = useState('');
+    const [idKategori, setIdKategori] = useState('');
+    const [pilihan, setPilihan] = useState(true);
+
     const {
         register,
         handleSubmit,
         watch,
         reset,
         formState: { errors },
+        setValue,
     } = useForm();
-
-    useEffect(() => {
-        async function fetchData() {
-            const request = await link.get("/kategori");
-            setIsi(request.data);
-        }
-
-        fetchData();
-    }, []);
+    
+    async function fetchData() {
+        const request = await link.get("/kategori");
+        setIsi(request.data);
+    }
 
     function simpan(data){
-        console.log(data)
+        if(pilihan){
+            link.post('/kategori', data).then(res=>{setPesan(res.data.pesan)})
+        }else{
+            link.put(`/kategori/${idKategori}`, data).then(res=>{setPesan(res.data)})
+            setPilihan(true)
+        }
+
         reset()
+        fetchData()
+    }
+
+    useEffect(() => {
+        fetchData()
+    })
+
+    async function hapus(idkategori){
+        if (window.confirm('Yakin menghapus kategori ini?')) {
+            const res = await link.delete(`/kategori/${idkategori}`)
+            setPesan(res.data)
+        }
+    }
+
+    async function showData(idkategori){
+        const res = await link.get(`/kategori/${idkategori}`)
+
+        setValue("kategori", res.data[0].kategori)
+        setValue("keterangan", res.data[0].keterangan)
+        setIdKategori(res.data[0].idkategori)
+        setPilihan(false)
     }
 
     return (
@@ -32,22 +60,27 @@ function Kategori() {
                 <h1>Panel Kategori</h1>
             </div>
             <div className="row">
+                <p>{pesan}</p>
+            </div>
+            <div className="row">
                 <form onSubmit={handleSubmit(simpan)} className="col-6 mb-3">
                     <input type="text" {...register("kategori", { required: true })} className="form-control my-1" placeholder="Kategori Baru..." />
                     {errors.kategori && <p className="text-danger">This field is required</p>}
                     <input type="text" {...register("keterangan", { required: true })} className="form-control my-1" placeholder="Keterangan kategori..." />
                     {errors.keterangan && <p className="text-danger">This field is required</p>}
-                    <button type="submit" className="btn btn-primary my-2">Buat Kategori Baru</button>
+                    <button type="submit" className="btn btn-primary my-2">Submit</button>
                     {/* <input type="submit" {...register("exampleRequired", { required: true })} className="btn btn-primary my-2" name="submit" /> */}
                 </form>
             </div>
             <div className="row">
                 <table className="table table-bordered  fs-6">
                     <thead>
-                        <tr>
+                        <tr className="text-center">
                             <th>No</th>
                             <th>Kategori</th>
                             <th>Keterangan</th>
+                            <th>Hapus</th>
+                            <th>Ubah</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,6 +89,8 @@ function Kategori() {
                                 <th>{index + 1}</th>
                                 <td>{el.kategori}</td>
                                 <td>{el.keterangan}</td>
+                                <td className="text-center"><button onClick={() => {hapus(el.idkategori)}} className="btn btn-danger">Hapus</button></td>
+                                <td className="text-center"><button onClick={() => {showData(el.idkategori)}} className="btn btn-warning">Ubah</button></td>
                             </tr>
                         ))}
                     </tbody>
