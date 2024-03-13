@@ -1,9 +1,11 @@
+import UseDelete from '../Hook/UseDelete';
 import UseGet from '../Hook/UseGet'
 
 let count = 0
 
 function Menu() {
   const [isi] = UseGet('/menu')
+  const {hapus, pesan} = UseDelete("/menu");
 
   return (
     <>
@@ -11,7 +13,7 @@ function Menu() {
             <h1>Panel Menu</h1>
         </div>
         <div className="row">
-            <p>{}</p>
+            <p>{pesan}</p>
         </div>
         <div className="row">
             <table  className="table table-bordered mt-4 fs-6">
@@ -22,6 +24,7 @@ function Menu() {
                         <th>Menu</th>
                         <th>Gambar</th>
                         <th>Harga</th>
+                        <th>Hapus</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +35,7 @@ function Menu() {
                                 <td>{value.menu}</td>
                                 <td className="text-center"><img style={{ maxWidth: '64px' }} src={value.gambar} alt="" /></td>
                                 <td>{value.harga}</td>
+                                <td><button onClick={() => hapus(value.idmenu)} className="btn btn-danger">Hapus</button></td>
                             </tr>
                         ))}
                 </tbody>

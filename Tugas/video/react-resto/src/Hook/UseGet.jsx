@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { link } from "../Axios/link";
 
 function UseGet(url) {

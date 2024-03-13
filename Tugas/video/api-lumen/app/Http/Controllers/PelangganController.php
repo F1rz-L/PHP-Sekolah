@@ -108,7 +108,7 @@ class PelangganController extends Controller
 
         if ($pelanggan) {
             return response()->json([
-                'pesan' => "Data pelanggan dengan id $id berhasil dihapus",
+                'pesan' => "Data pelanggan dengan ID $id berhasil dihapus",
                 'data' => $pelanggan
             ], 200);
         }
