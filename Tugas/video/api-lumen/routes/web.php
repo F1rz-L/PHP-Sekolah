@@ -36,6 +36,12 @@ $router->group( ['prefix' => 'api', 'middleware' => 'auth'], function() use ($ro
     $router->get('/menu', ['uses' => 'MenuController@index']);
     $router->get('/menu/{id}', ['uses' => 'MenuController@show']);
     $router->post('/menu', ['uses' => 'MenuController@create']);
-    $router->put('/menu/{id}', ['uses' => 'MenuController@update']);
+    $router->post('/menu/{id}', ['uses' => 'MenuController@update']);
     $router->delete('/menu/{id}', ['uses' => 'MenuController@destroy']);
+
+    $router->get('/order', ['uses' => 'OrderController@index']);
+    $router->get('/order/{id}', ['uses' => 'OrderController@show']);
+    $router->post('/order', ['uses' => 'OrderController@create']);
+    $router->put('/order/{id}', ['uses' => 'OrderController@update']);
+    $router->delete('/order/{id}', ['uses' => 'OrderController@destroy']);
 });

@@ -51,20 +51,11 @@ class MenuController extends Controller
         $menu = Menu::create($data);
 
         if ($menu) {
-            $result = [
+            return response()->json([
                 'status' => 201,
                 'pesan' => 'Data menu berhasil ditambahkan',
-                'data' => $data
-            ];
-        } else {
-            $result = [
-                'status' => 400,
-                'pesan' => 'Data menu gagal ditambahkan',
-                'data' => '',
-            ];
+            ]);
         }
-
-        return response()->json($result, $result['status']);
     }
 
     /**
@@ -84,9 +75,16 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function show(Menu $menu)
+    public function show($id)
     {
-        //
+        $data = DB::table('menus')
+        ->join('kategoris', 'kategoris.idkategori', '=', 'menus.idkategori')
+        ->select('menus.*', 'kategoris.kategori')
+        ->where('idmenu', '=', $id)
+        ->orderBy('kategori', 'ASC')
+        ->get();
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -107,9 +105,37 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Menu $menu)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'idkategori' => 'required|numeric',
+            'menu' => 'required',
+            'harga' => 'required|numeric',
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $namagambar = $request->file('gambar')->getClientOriginalName();
+            $request->file('gambar')->move('upload', $namagambar);
+            $data = [
+                'idkategori' => $request->input('idkategori'),
+                'menu' => $request->input('menu'),
+                'gambar' => url('upload/', $namagambar),
+                'harga' => $request->input('harga'),
+            ];
+        } else {
+            $data = [
+                'idkategori' => $request->input('idkategori'),
+                'menu' => $request->input('menu'),
+                'harga' => $request->input('harga'),
+            ];
+        }
+
+
+        $menu = Menu::where('idmenu', $id)->update($data);
+
+        if ($menu) {
+            return response()->json("Mengupdate kategori dengan ID $id", 201);
+        }
     }
 
     /**

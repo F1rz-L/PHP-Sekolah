@@ -4,6 +4,7 @@ import Kategori from "./Kategori";
 import Menu from "./Menu";
 import Pelanggan from "./Pelanggan";
 import Order from "./Order";
+import OrderDetail from "./OrderDetail";
 
 function Content() {
     const { konten } = useParams();
@@ -21,6 +22,10 @@ function Content() {
     if (konten === "order") {
         tampil = <Order/>
     }
+    if (konten === "orderdetail") {
+        tampil = <OrderDetail/>
+    }
+
 
     return (
         <>

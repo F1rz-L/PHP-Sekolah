@@ -69,6 +69,7 @@ function Kategori() {
                     {errors.kategori && <p className="text-danger">This field is required</p>}
                     <input type="text" {...register("keterangan", { required: true })} className="form-control my-1" placeholder="Keterangan kategori..." />
                     {errors.keterangan && <p className="text-danger">This field is required</p>}
+
                     <button type="submit" className="btn btn-primary my-2">Submit</button>
                     {/* <input type="submit" {...register("exampleRequired", { required: true })} className="btn btn-primary my-2" name="submit" /> */}
                 </form>

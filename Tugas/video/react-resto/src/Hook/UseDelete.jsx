@@ -11,7 +11,7 @@ function UseDelete(url) {
         }
     }
 
-    return {hapus, pesan};
+    return {hapus, pesan, setPesan};
 }
 
 export default UseDelete;
