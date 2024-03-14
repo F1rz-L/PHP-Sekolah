@@ -5,6 +5,7 @@ import Menu from "./Menu";
 import Pelanggan from "./Pelanggan";
 import Order from "./Order";
 import OrderDetail from "./OrderDetail";
+import User from "./User";
 
 function Content() {
     const { konten } = useParams();
@@ -24,6 +25,9 @@ function Content() {
     }
     if (konten === "orderdetail") {
         tampil = <OrderDetail/>
+    }
+    if (konten === "user") {
+        tampil = <User/>
     }
 
 

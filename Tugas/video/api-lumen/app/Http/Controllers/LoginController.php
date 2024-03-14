@@ -8,14 +8,20 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    public function index(){
+        $data = User::where('level', '<>', 'pelanggan')->get();
+
+        return response()->json($data);
+    }
+
     public function register(Request $request){
         $data = [
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            'level' => 'pelanggan',
+            'level' => $request->input('level'),
             'api_token' => '123',
             'status' => 1,
-            'relasi' => $request->input('email'),
+            'relasi' => $request->input('relasi'),
         ];
 
         User::create($data);

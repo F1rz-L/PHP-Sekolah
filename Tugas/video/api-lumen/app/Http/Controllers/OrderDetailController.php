@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderDetailController extends Controller
 {
@@ -14,7 +15,7 @@ class OrderDetailController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -44,9 +45,20 @@ class OrderDetailController extends Controller
      * @param  \App\Models\OrderDetail  $orderDetail
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderDetail $orderDetail)
+    public function show($a, $b)
     {
-        //
+        $order = DB::table('order_details')
+        ->join('orders', 'orders.idorder', '=', 'order_details.idorder')
+        ->join('menus', 'menus.idmenu', '=', 'order_details.idmenu')
+        ->join('pelanggans', 'pelanggans.idpelanggan', '=', 'orders.idpelanggan')
+        ->join('kategoris', 'kategoris.idkategori', '=', 'menus.idkategori')
+        ->select('orders.*', 'menus.*', 'order_details.*', 'pelanggans.*', 'kategoris.*')
+        ->where('tglorder', '>=', $a)
+        ->where('tglorder', '<=', $b)
+        ->orderBy('tglorder', 'ASC')
+        ->get();
+
+        return response()->json($order, 200);
     }
 
     /**

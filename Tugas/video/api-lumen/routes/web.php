@@ -19,6 +19,7 @@ $router->get('/', function () use ($router) {
 
 $router->post('/register', ['uses' => 'LoginController@register']);
 $router->post('/login', ['uses' => 'LoginController@login']);
+$router->get('/user', ['uses' => 'LoginController@index']);
 
 $router->group( ['prefix' => 'api', 'middleware' => 'auth'], function() use ($router) {
     $router->get('/kategori', ['uses' => 'KategoriController@index']);
@@ -40,8 +41,15 @@ $router->group( ['prefix' => 'api', 'middleware' => 'auth'], function() use ($ro
     $router->delete('/menu/{id}', ['uses' => 'MenuController@destroy']);
 
     $router->get('/order', ['uses' => 'OrderController@index']);
-    $router->get('/order/{id}', ['uses' => 'OrderController@show']);
+    $router->get('/order/{a}/{b}', ['uses' => 'OrderController@show']);
     $router->post('/order', ['uses' => 'OrderController@create']);
     $router->put('/order/{id}', ['uses' => 'OrderController@update']);
     $router->delete('/order/{id}', ['uses' => 'OrderController@destroy']);
+
+    $router->get('/orderdetail', ['uses' => 'OrderDetailController@index']);
+    $router->get('/orderdetail/{a}/{b}', ['uses' => 'OrderDetailController@show']);
+    $router->post('/orderdetail', ['uses' => 'OrderDetailController@create']);
+    $router->put('/orderdetail/{id}', ['uses' => 'OrderDetailController@update']);
+    $router->delete('/orderdetail/{id}', ['uses' => 'OrderDetailController@destroy']);
+
 });

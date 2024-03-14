@@ -16,7 +16,7 @@ function Sidebar() {
                     <Link to={`${url}/pelanggan`}><li className="list-group-item">Pelanggan</li></Link>
                     <Link to={`${url}/order`}><li className="list-group-item">Order</li></Link>  
                     <Link to={`${url}/orderdetail`}><li className="list-group-item">Order Detail</li></Link>
-                    <Link to={`${url}/admin-page`}><li className="list-group-item">Admin</li></Link>
+                    <Link to={`${url}/user`}><li className="list-group-item">User Admin</li></Link>
                 </ul>
             </div>
         </>

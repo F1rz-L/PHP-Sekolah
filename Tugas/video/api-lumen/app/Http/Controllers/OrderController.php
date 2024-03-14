@@ -51,9 +51,17 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($a, $b)
     {
-        //
+        $order = DB::table('orders')
+        ->join('pelanggans', 'pelanggans.idpelanggan', '=', 'orders.idpelanggan')
+        ->select('orders.*', 'pelanggans.*')
+        ->where('tglorder', '>=', $a)
+        ->where('tglorder', '<=', $b)
+        ->orderBy('tglorder', 'ASC')
+        ->get();
+
+        return response()->json($order);
     }
 
     /**
