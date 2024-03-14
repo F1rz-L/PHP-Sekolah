@@ -1,4 +1,5 @@
 import Back from "./Back/Back";
+import Login from "./Back/Login";
 import Front from "./Front/Front";
 import Nav from "./Front/Nav";
 import NavData from "./Front/NavData";
@@ -14,6 +15,7 @@ function App() {
                         <Route path="/" Component={Front} />
                         <Route path="/home" Component={Front} />
                         <Route path="/admin/*" Component={Back} />
+                        <Route path="/login" Component={Login} />
                     </Routes>
                 </BrowserRouter>
             </div>
