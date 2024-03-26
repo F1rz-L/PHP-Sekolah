@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\BukuController;
+use App\Http\Controllers\PelajaranController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::delete('/buku/{id}', [BukuController::class, 'destroy']);
 
 Route::apiResource('/buku', BukuController::class);
+
+//siswa
+Route::get('/siswa', [SiswaController::class, 'index']);
+
+Route::get('/pelajaran', [PelajaranController::class, 'index']);
